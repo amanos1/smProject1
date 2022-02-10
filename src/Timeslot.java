@@ -1,5 +1,5 @@
 package src;
-import java.util.ArrayList;
+
 
 public class Timeslot {
 
@@ -73,32 +73,20 @@ public class Timeslot {
     {
         time.setMinute(m);
     }
-    //everytime you make an appointment this method will clear all
-    //the appointments that were schduled before today
-    public void clearSchdule()
-    {
-
-    }
+    public int compareTo(Timeslot ts) 
+	{
+		if(this.getDate().compareTo(ts.getDate()) == 0 && this.getTime().compareTo(ts.getTime()) == 0)
+		{
+			if(this.getMinute() >= ts.getMinute()-15 || this.getMinute() <= ts.getMinute()+15) 
+			{
+				return 0;
+			}
+		}
+		return 2;
+	}
 
     public String toString()
     {
-        final int SINGLE_DIGIT_MONTH = 9;
-        final int SINGLE_DIGIT_Day = 9;
-        String m = "0" ,d = "0" ,y = "";
-        if(date.getMonth() <= SINGLE_DIGIT_MONTH)
-        {
-            m += date.getMonth();
-        }else
-        {
-            m = ""+date.getMonth();
-        }
-        if(date.getDay() <= SINGLE_DIGIT_Day) {
-            d += date.getDay();
-        }else
-        {
-            d = ""+date.getDay();
-        }
-        y = ""+date.getYear();
-        return m+"/"+d+"/"+y+" "+time.getHour()+":"+time.getMinute();
+        return date.toString()+" "+time.toString();
     }
 }
