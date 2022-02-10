@@ -21,8 +21,9 @@ public class Time implements Comparable<Time>{
     }
 
     public Time(String t) {
-        hour = Integer.parseInt(t.substring(0,2));
-        minute = Integer.parseInt(t.substring(3));
+    	String[] timeElements = t.split(":");
+        hour = Integer.parseInt(timeElements[0]);
+        minute = Integer.parseInt(timeElements[1]);
     }
 
     public Time(Time t)

@@ -15,11 +15,8 @@ public class Timeslot {
 
     public Timeslot(Date d, Time t)
     {
-        date.setDay(d.getDay());
-        date.setMonth(d.getMonth());
-        date.setYear(d.getYear());
-        time.setHour(t.getHour());
-        time.setMinute(t.getMinute());
+    	date = new Date(d);
+    	time = new Time(t.getHour(), t.getMinute());
     }
 
     public Timeslot(int month, int day, int year, int hour, int minute)

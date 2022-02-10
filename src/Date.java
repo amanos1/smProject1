@@ -10,9 +10,10 @@ public class Date implements Comparable<Date>{
 
     public Date(String date)
     {
-        month = Integer.parseInt(date.substring(0,2));
-        day = Integer.parseInt(date.substring(3,5));
-        year = Integer.parseInt(date.substring(6));
+    	String[] dateElements = date.split("/");
+        month = Integer.parseInt(dateElements[0]);
+        day = Integer.parseInt(dateElements[1]);
+        year = Integer.parseInt(dateElements[2]);
     }
 
     public Date(Date d) {
