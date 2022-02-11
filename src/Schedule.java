@@ -12,7 +12,7 @@ public class Schedule
     }
 
     private int find(Appointment appt) {
-        for(int i = 0; i < appointments.length; i++)
+        for(int i = 0; i < numAppts; i++)
         {
             if(appt.equals(appointments[i]))
             {
@@ -47,9 +47,10 @@ public class Schedule
             Appointment check = new Appointment(appt.getPatient(),appt.getTimeslot(),appt.getLocation());
 
             //if an appointment already exists return false
-            for(int i = 0; i <=appointments.length; i++)
+            for(int i = 0; i < numAppts; i++)
             {
-                if(appointments[i].equals(appt)) {
+                if(appointments[i].equals(appt))
+                {
                     return false;
                 }
             }
