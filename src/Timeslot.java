@@ -4,73 +4,97 @@ package src;
 public class Timeslot {
 
     private Date date;
-    private Time time;
+	private Time time;
+	
+	//By default it's set to today's date and current time
+	public Timeslot() 
+	{
+		this.date = new Date();
+		this.time = new Time();
+	}
+	
+	public Timeslot(Date d, Time t) 
+	{
+		Date date = new Date();
+		Time time = new Time();
+		date.setDay(d.getDay());
+		date.setMonth(d.getMonth());
+		date.setYear(d.getYear());
+		time.setHour(t.getHour());
+		time.setMinute(t.getMinute());
+		this.date = date;
+		this.time = time;
+	}
+	
+	public Timeslot(int month, int day, int year, int hour, int minute) 
+	{
+		this.date.setMonth(month);
+		this.date.setDay(day);
+		this.date.setYear(year);
+		this.time.setHour(hour);
+		this.time.setMinute(minute);
+		this.date = date;
+		this.time = time;
 
-    //By default it's set to today's date and current time
-    public Timeslot()
-    {
-        date = new Date();
-        time = new Time();
-    }
+	}
+	
+	public Timeslot(String h, String m) {
 
-    public Timeslot(Date d, Time t)
-    {
-    	date = new Date(d);
-    	time = new Time(t.getHour(), t.getMinute());
-    }
+		this.date.setMonth(Integer.parseInt(h.substring(0,2)));
+		this.date.setDay(Integer.parseInt(h.substring(3,5)));
+		this.date.setYear(Integer.parseInt(h.substring(6)));
+		this.time.setHour(Integer.parseInt(m.substring(0,2)));
+		this.time.setMinute(Integer.parseInt(m.substring(3)));
+		this.date = date;
+		this.time = time;
 
-    public Timeslot(int month, int day, int year, int hour, int minute)
-    {
-        date.setMonth(month);
-        date.setDay(day);
-        date.setYear(year);
-        time.setHour(hour);
-        time.setMinute(minute);
-    }
+		
+	}
+	
+	public Timeslot(Timeslot ts) 
+	{
+		this.date = ts.date;
+		this.time = ts.time;
+		this.date = date;
+		this.time = time;
 
-    public Timeslot(String h, String m) {
-        date.setMonth(Integer.parseInt(h.substring(0,2)));
-        date.setDay(Integer.parseInt(h.substring(3,5)));
-        date.setYear(Integer.parseInt(h.substring(6)));
-        time.setHour(Integer.parseInt(m.substring(0,2)));
-        time.setMinute(Integer.parseInt(m.substring(3)));
-
-    }
-
-    public Timeslot(Timeslot ts)
-    {
-        date = ts.date;
-        time = ts.time;
-    }
-
-    public int getHour()
-    {
-        int h = time.getHour();
-        return h;
-    }
-
-    public int getMinute()
-    {
-        int m = time.getMinute();
-        return m;
-    }
-
-    public Date getDate()
-    {
-        Date temp = new Date(date.getMonth(), date.getDay(), date.getYear());
-        return temp;
-    }
-
-    public void setHour(int h)
-    {
-        time.setHour(h);
-    }
-
-    public void setMinute(int m)
-    {
-        time.setMinute(m);
-    }
-    public int compareTo(Timeslot ts) 
+	}
+	
+	public int getHour() 
+	{
+		int h = this.time.getHour();
+		return h;
+	}
+	
+	public int getMinute() 
+	{
+		int m = this.time.getMinute();
+		return m;
+	}
+	
+	public Date getDate() 
+	{
+		Date temp = new Date(this.date.getMonth(),this.date.getDay(),this.date.getYear());
+		return temp;
+	}
+	
+	public Time getTime() {
+		Time temp  = new Time(this.time.getHour(), this.time.getMinute());
+		return temp;
+	}
+	
+	public void setHour(int h) 
+	{
+		this.time.setHour(h);
+	}
+	
+	public void setMinute(int m) 
+	{
+		this.time.setMinute(m);
+	}
+	
+	//this is new appointment
+	public int compareTo(Timeslot ts) 
 	{
 		if(this.getDate().compareTo(ts.getDate()) == 0 && this.getTime().compareTo(ts.getTime()) == 0)
 		{
@@ -81,9 +105,11 @@ public class Timeslot {
 		}
 		return 2;
 	}
-
-    public String toString()
-    {
-        return date.toString()+" "+time.toString();
-    }
+	
+	public String toString() 
+	{
+		
+		return this.getDate().toString()+" "+this.getTime().toString();
+		//return m+"/"+d+"/"+y+" "+time.getHour()+":"+time.getMinute();
+	}
 }
