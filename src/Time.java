@@ -53,6 +53,7 @@ public class Time implements Comparable<Time>{
     {
         minute = m;
     }
+
     public boolean isValid()
     {
         final int TOTAL_HOURS = 24;
@@ -68,6 +69,11 @@ public class Time implements Comparable<Time>{
         return true;
     }
 
+    public boolean equals(Time t)
+    {
+    	return hour == t.getHour() && minute == t.getMinute();
+    }
+    
     public int compareTo(Time time)
     {
         if(this.hour == time.hour)

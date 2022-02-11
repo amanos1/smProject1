@@ -4,10 +4,11 @@ public class Schedule
 {
     private Appointment [] appointments;
     private int numAppts;
+    private int maxNum = 10;
 
     public Schedule()
     {
-        appointments = new Appointment[10];
+        appointments = new Appointment[maxNum];
         numAppts = 0;
     }
 
@@ -24,8 +25,9 @@ public class Schedule
 
     private void grow()
     {
-        Appointment [] newAppointment = new Appointment[numAppts+4];
-        for(int i = 0; i < appointments.length; i++)
+    	maxNum += 4;
+        Appointment [] newAppointment = new Appointment[maxNum];
+        for(int i = 0; i < numAppts; i++)
         {
             newAppointment[i] = appointments[i];
         }
@@ -65,23 +67,31 @@ public class Schedule
             }
             appointments[numAppts] = appt;
             numAppts++;
+            if(numAppts == maxNum) grow();
             return true;
 
         }
     }
 
+    private void swap(int a, int b)
+    {
+    	Appointment temp = appointments[a];
+    	appointments[a] = appointments[b];
+    	appointments[b] = temp;
+    }
+
     public boolean remove(Appointment appt)
     {
-        int index;
+        int index = find(appt);
         if(numAppts == 0) {
             return false;
         }else
         {
-            if(find(appt) == -1) {
+            if(index == -1) {
                 return false;
             }else {
-                index = find(appt);
-                appointments[index] = null;
+            	swap(index, --numAppts);
+                appointments[numAppts] = null;
                 return true;
             }
         }
@@ -103,10 +113,12 @@ public class Schedule
 
     public void print()
     {
+    	System.out.println("*list of appointments in the schedule*");
         for(int i = 0; i < numAppts; i++)
         {
             System.out.println(appointments[i].toString());
         }
+    	System.out.println("*end of schedule*");
     }
 
     public void printByZip()

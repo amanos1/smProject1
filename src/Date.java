@@ -187,22 +187,8 @@ public class Date implements Comparable<Date>{
 		}
 	}
 
-	public String toString() 
+	public String toString()
 	{
-		String m = "0" ,d = "0" ,y = ""+this.year;
-		if(this.month < 10) 
-		{
-			m += this.month;
-		}else 
-		{
-			m = ""+this.month;
-		}
-		if(this.day < 10) {
-			d += this.day;
-		}else 
-		{
-			d = ""+this.day;
-		}
-		return m+"/"+d+"/"+y;
+		return month+"/"+day+"/"+year;
 	}
 }

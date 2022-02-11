@@ -39,14 +39,13 @@ public class Timeslot {
 	}
 	
 	public Timeslot(String h, String m) {
-
 		this.date.setMonth(Integer.parseInt(h.substring(0,2)));
 		this.date.setDay(Integer.parseInt(h.substring(3,5)));
 		this.date.setYear(Integer.parseInt(h.substring(6)));
 		this.time.setHour(Integer.parseInt(m.substring(0,2)));
 		this.time.setMinute(Integer.parseInt(m.substring(3)));
-		this.date = date;
-		this.time = time;
+		this.date = new Date(h);
+		this.time = new Time(m);
 
 		
 	}
@@ -92,7 +91,12 @@ public class Timeslot {
 	{
 		this.time.setMinute(m);
 	}
-	
+
+	public boolean equals(Timeslot ts)
+	{
+		return time.equals(ts.getTime()) && date.equals(ts.getDate());
+	}
+
 	//this is new appointment
 	public int compareTo(Timeslot ts) 
 	{
@@ -105,7 +109,7 @@ public class Timeslot {
 		}
 		return 2;
 	}
-	
+
 	public String toString() 
 	{
 		

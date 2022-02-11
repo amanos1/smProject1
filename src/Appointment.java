@@ -31,18 +31,18 @@ public class Appointment
 		return this.location;
 	}
 	//NEED TO FINISH THIS METHOD
-	public int compareTo(Appointment a) 
+	public int compareTo(Appointment a)
 	{
 		return 0;
 	}
 	
-	public boolean equals(Appointment a) 
+	public boolean equals(Appointment a)
 	{
 		return (this.patient.equals(a.getPatient()) && this.slot.equals(a.getTimeslot())&&
-				this.location.equals(a.getLocation()));
+				this.location == a.getLocation());
 	}
 	
-	public String toString() 
+	public String toString()
 	{
 		return (patient.toString()+
 				", Appointment detail: "+this.slot.toString()+

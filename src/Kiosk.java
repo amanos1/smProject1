@@ -53,9 +53,9 @@ public class Kiosk {
         Appointment temp = buildAppointment(com);
         if(schedule.remove(temp)) 
         {
-            System.out.println("Removed");
+            System.out.println("Appointment cancelled.");
         }else {
-            System.out.println("Invlaid Command");
+            System.out.println("Not cancelled, appointment does not exist.");
         }
 	}
 	
