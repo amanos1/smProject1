@@ -71,29 +71,16 @@ public class Time implements Comparable<Time>{
 
     public boolean equals(Time t)
     {
-    	return hour == t.getHour() && minute == t.getMinute();
+    	return compareTo(t) == 0;
     }
     
     public int compareTo(Time time)
     {
-        if(this.hour == time.hour)
-        {
-            if(this.minute == time.minute)
-            {
-                return 0;
-            }else if(this.minute > time.minute)
-            {
-                return 1;
-            }else
-            {
-                return -1;
-            }
-        }else if(this.hour > time.hour)
-        {
-            return 1;
-        }else {
-            return 0;
-        }
+    	if(hour > time.getHour()) return 1;
+    	else if(hour < time.getHour()) return -1;
+    	if(minute > time.getMinute()) return 1;
+    	else if(minute < time.getMinute()) return -1;
+    	return 0;
     }
 
     public String toString()

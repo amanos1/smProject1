@@ -28,35 +28,19 @@ public class Timeslot {
 	
 	public Timeslot(int month, int day, int year, int hour, int minute) 
 	{
-		this.date.setMonth(month);
-		this.date.setDay(day);
-		this.date.setYear(year);
-		this.time.setHour(hour);
-		this.time.setMinute(minute);
-		this.date = date;
-		this.time = time;
-
+		this.date = new Date(month, day, year);
+		this.time = new Time(hour, minute);
 	}
-	
+
 	public Timeslot(String h, String m) {
-		this.date.setMonth(Integer.parseInt(h.substring(0,2)));
-		this.date.setDay(Integer.parseInt(h.substring(3,5)));
-		this.date.setYear(Integer.parseInt(h.substring(6)));
-		this.time.setHour(Integer.parseInt(m.substring(0,2)));
-		this.time.setMinute(Integer.parseInt(m.substring(3)));
 		this.date = new Date(h);
 		this.time = new Time(m);
-
-		
 	}
-	
-	public Timeslot(Timeslot ts) 
-	{
-		this.date = ts.date;
-		this.time = ts.time;
-		this.date = date;
-		this.time = time;
 
+	public Timeslot(Timeslot ts)
+	{
+		this.date = new Date(ts.date);
+		this.time = new Time(ts.time);
 	}
 	
 	public int getHour() 
@@ -94,26 +78,80 @@ public class Timeslot {
 
 	public boolean equals(Timeslot ts)
 	{
-		return time.equals(ts.getTime()) && date.equals(ts.getDate());
+		return compareTo(ts) == 0;
 	}
 
 	//this is new appointment
 	public int compareTo(Timeslot ts) 
 	{
-		if(this.getDate().compareTo(ts.getDate()) == 0 && this.getTime().compareTo(ts.getTime()) == 0)
-		{
-			if(this.getMinute() >= ts.getMinute()-15 || this.getMinute() <= ts.getMinute()+15) 
-			{
-				return 0;
-			}
-		}
-		return 2;
+		if(date.compareTo(ts.getDate()) != 0) return date.compareTo(ts.getDate());
+		if(time.compareTo(ts.getTime()) != 0) return time.compareTo(ts.getTime());
+		return 0;
 	}
 
 	public String toString() 
 	{
-		
-		return this.getDate().toString()+" "+this.getTime().toString();
-		//return m+"/"+d+"/"+y+" "+time.getHour()+":"+time.getMinute();
+		return date.toString() + " " + time.toString();
+	}
+	
+	public static void main(String[] args)
+	{
+		Timeslot t1;
+		Timeslot t2;
+
+		//test case 1
+		t1 = new Timeslot("2/20/1984", "4:20");
+		t2 = new Timeslot("2/20/1985", "4:20");
+		System.out.println(t1.compareTo(t2));
+
+		//test case 2
+		t1 = new Timeslot("2/20/1984", "4:20");
+		t2 = new Timeslot("2/20/1983", "4:20");
+		System.out.println(t1.compareTo(t2));
+
+		//test case 3
+		t1 = new Timeslot("2/20/1984", "4:20");
+		t2 = new Timeslot("3/20/1984", "4:20");
+		System.out.println(t1.compareTo(t2));
+
+		//test case 4
+		t1 = new Timeslot("3/20/1984", "4:20");
+		t2 = new Timeslot("2/20/1984", "4:20");
+		System.out.println(t1.compareTo(t2));
+
+		//test case 5
+		t1 = new Timeslot("2/19/1984", "4:20");
+		t2 = new Timeslot("2/20/1984", "4:20");
+		System.out.println(t1.compareTo(t2));
+
+		//test case 6
+		t1 = new Timeslot("2/20/1984", "4:20");
+		t2 = new Timeslot("2/19/1984", "4:20");
+		System.out.println(t1.compareTo(t2));
+
+		//test case 7
+		t1 = new Timeslot("2/20/1984", "3:20");
+		t2 = new Timeslot("2/20/1984", "4:20");
+		System.out.println(t1.compareTo(t2));
+
+		//test case 8
+		t1 = new Timeslot("2/20/1984", "4:20");
+		t2 = new Timeslot("2/20/1984", "3:20");
+		System.out.println(t1.compareTo(t2));
+
+		//test case 9
+		t1 = new Timeslot("2/20/1984", "4:19");
+		t2 = new Timeslot("2/20/1984", "4:20");
+		System.out.println(t1.compareTo(t2));
+
+		//test case 10
+		t1 = new Timeslot("2/20/1984", "4:20");
+		t2 = new Timeslot("2/20/1984", "4:19");
+		System.out.println(t1.compareTo(t2));
+
+		//test case 11
+		t1 = new Timeslot("2/20/1984", "4:20");
+		t2 = new Timeslot("2/20/1984", "4:20");
+		System.out.println(t1.compareTo(t2));
 	}
 }

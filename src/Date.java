@@ -73,39 +73,38 @@ public class Date implements Comparable<Date>{
 	{
 		final int TOTAL_MONTH = 12;
 		final int MIN_MONTH = 1;
+		final int TOTAL_FEB_DAYS = 28;
+		final int TOTAL_FEB_LEAP_DAYS = 29;
+		final int TOTAL_AJSN_DAYS = 30;
 		final int TOTAL_MONTH_DAYS = 31;
-		boolean leapYear = isLeapYear(this.year);
-		
-		if(this.month > TOTAL_MONTH || this.month < MIN_MONTH) {
-			return false;
-		}else if((this.month <= Month.JUN && this.month % 2 != 0) || 
-				(this.month >= Month.AUG && this.month % 2 == 0)) //MONTHS WITH 31 DAYS
+		boolean leapYear = isLeapYear(year);
+
+		if(year < 1900) return false;
+
+		if(month > TOTAL_MONTH || month < MIN_MONTH) return false;
+
+		if(day < 1) return false;
+		if(month == Month.FEB)
 		{
-			if(this.day > TOTAL_MONTH_DAYS) 
+			if(leapYear)
 			{
-				return false;
+				if(day > TOTAL_FEB_LEAP_DAYS) return false;
+			} else
+			{
+				if(day > TOTAL_FEB_DAYS) return false;
 			}
-		}else if(!leapYear && this.month == Month.FEB) 
+		} else if(month == Month.APR || month  == Month.JUN || month == Month.SEP || month == Month.NOV) //MONTHS WITH 30 DAYS
 		{
-			if(this.day>TOTAL_MONTH_DAYS-3) 
-			{
-				return false;
-			}else 
-			{
-				return true;
-			}
-		}else if((this.month <= Month.JUN && this.month % 2 == 0) || 
-				(this.month >= Month.SEP && this.month %2 != 0)) //MONTHS WITH 28 DAYS
+			if(day > TOTAL_AJSN_DAYS) return false;
+		} else  //MONTHS WITH 31 DAYS
 		{
-			if(this.day > TOTAL_MONTH_DAYS-1) 
-			{
-				return false;
-			}
+			if(this.day > TOTAL_MONTH_DAYS-1) return false;
 		}
+
 		return true;
 	}
 
-	public boolean isLeapYear(int y) 
+	private boolean isLeapYear(int y) 
 	{
 		final int QUADRENNIAL = 4;
 		final int CENTENNIAL = 100;
@@ -131,64 +130,73 @@ public class Date implements Comparable<Date>{
 	    }
 	}
 
-	public boolean equals(Date date) 
+	public boolean equals(Date date)
 	{
-		if(date instanceof Date) 
-		{
-			if(this.day == date.day && this.month == date.month && 
-				this.year == date.year)
-			{
-				return true;
-			}else 
-			{
-				return false;
-			}
-		}else {
-			return false;
-		}
+		return compareTo(date) == 0;
 	}
 
-	public int compareTo(Date date) 
+	public int compareTo(Date date)
 	{
-		if(this.equals(date)) {
-			return 0;
-		}
-		if(this.year == date.year) 
-		{
-			if(this.month == date.month) 
-			{
-				if(this.day == date.day) 
-				{
-					return 0;
-				}else if(this.day > date.day) 
-				{
-					return 1;
-				}else 
-				{
-					return -1;
-				}
-			}else if(this.month == date.month) 
-			{
-				return 0;
-			}else if(this.month > date.month) {
-				return 1;
-			}else {
-				return 1;
-			}
-		} else if(this.year == date.year) 
-		{
-			return 0;
-		}else if(this.year > date.year) 
-		{
-			return 1;
-		}else 
-		{
-			return -1;
-		}
+		if(year > date.getYear()) return 1;
+		else if(year < date.getYear()) return -1;
+		if(month > date.getMonth()) return 1;
+		else if(month < date.getMonth()) return -1;
+		if(day > date.getDay()) return 1;
+		else if(day < date.getDay()) return -1;
+		return 0;
 	}
 
 	public String toString()
 	{
-		return month+"/"+day+"/"+year;
+		return month + "/" + day + "/" + year;
+	}
+
+	public static void main(String[] args)
+	{
+		Date d;
+
+		//test case 1
+		d = new Date("5/22/1883");
+		System.out.println(d.isValid());
+
+		//test case 2
+		d = new Date("16/3/1984");
+		System.out.println(d.isValid());
+
+		//test case 3
+		d = new Date("0/15/2002");
+		System.out.println(d.isValid());
+
+		//test case 4
+		d = new Date("2/29/1993");
+		System.out.println(d.isValid());
+
+		//test case 5
+		d = new Date("2/-1/1993");
+		System.out.println(d.isValid());
+
+		//test case 6
+		d = new Date("2/31/1984");
+		System.out.println(d.isValid());
+
+		//test case 7
+		d = new Date("6/31/2000");
+		System.out.println(d.isValid());
+
+		//test case 8
+		d = new Date("6/0/2000");
+		System.out.println(d.isValid());
+
+		//test case 9
+		d = new Date("12/500/1994");
+		System.out.println(d.isValid());
+
+		//test case 10
+		d = new Date("12/0/1994");
+		System.out.println(d.isValid());
+
+		//test case 11
+		d = new Date("3/3/2019");
+		System.out.println(d.isValid());
 	}
 }
