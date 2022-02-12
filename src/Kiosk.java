@@ -63,8 +63,8 @@ private void book(String com)
 {
     Appointment temp1 = buildAppointment(com);
     if(temp1 == null) return;
-    if(schedule.checkConflict(temp1) == false || schedule.appointmentExists(temp1)) {
-    if(schedule.add(temp1)) 
+    if(schedule.checkConflict(temp1) == false || schedule.appointmentExists(temp1) || !(schedule.checkTimeslotConflict(temp1.getTimeslot()))) {
+    if(schedule.add(temp1) ) 
     {
         schedule.clearSchedule();
         System.out.println("Appointment booked and added to the schedule.");
