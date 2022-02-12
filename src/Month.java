@@ -1,5 +1,9 @@
 package src;
 
+/**
+ * Small helper class that stores the numerical values of each month.
+ * @author Harshkumar Patel
+ */
 public class Month
 {
     public static final int JAN = 1;
