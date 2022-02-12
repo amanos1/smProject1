@@ -120,7 +120,13 @@ public static Appointment buildAppointment(String com)
         return null;
     }
     Appointment appt = new Appointment(patient, ts, loc);
+    if(appt.isValidTime()) 
+    {
     return appt;
+    }else {
+    	 System.out.println("Appointment Time must be between 9:00 and 16:45");
+         return null;
+    }
 }
 
 public static Patient removeAllAppointment(String com)
@@ -139,6 +145,5 @@ public static Patient removeAllAppointment(String com)
 }
 
 }
-
 
 
