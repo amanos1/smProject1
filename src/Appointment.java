@@ -33,8 +33,25 @@ public class Appointment
 	//NEED TO FINISH THIS METHOD
 	public int compareTo(Appointment a)
 	{
-		return 0;
+		if(this.getTimeslot().compareTo(this.getTimeslot()) == 0)
+			{
+				if(this.location.equals(ts.getLocation())) 
+				{
+					return 0;
+				}
+			}
+			return 2;
 	}
+	
+	public boolean isValidTime() 
+		{
+			if(this.getTimeslot().getHour() < 9 || this.getTimeslot().getHour() > 16 || (this.getTimeslot().getHour() == 16 && this.getTimeslot().getMinute() > 45)) 
+			{
+				return false;
+			}
+			return true;
+		}
+		
 	
 	public boolean equals(Appointment a)
 	{
