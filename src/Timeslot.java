@@ -84,9 +84,15 @@ public class Timeslot {
 	//this is new appointment
 	public int compareTo(Timeslot ts) 
 	{
-		if(date.compareTo(ts.getDate()) != 0) return date.compareTo(ts.getDate());
-		if(time.compareTo(ts.getTime()) != 0) return time.compareTo(ts.getTime());
-		return 0;
+		final int TIME_INTERVAL = 15;
+		if((this.getDate().compareTo(ts.getDate())) == 0 )
+		{
+			if(this.getMinute() >= (ts.getMinute()-TIME_INTERVAL) && this.getMinute() <= (ts.getMinute()+TIME_INTERVAL)) 
+			{
+				return 0;
+			}
+		}
+		return 2;
 	}
 
 	public String toString() 
