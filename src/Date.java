@@ -78,8 +78,9 @@ public class Date implements Comparable<Date>{
 		final int TOTAL_AJSN_DAYS = 30;
 		final int TOTAL_MONTH_DAYS = 31;
 		boolean leapYear = isLeapYear(year);
+		Calendar today = Calendar.getInstance();
 
-		if(year < 1900) return false;
+		if(year < 1900 || year > today.get(Calendar.YEAR)) return false;
 
 		if(month > TOTAL_MONTH || month < MIN_MONTH) return false;
 
@@ -98,7 +99,7 @@ public class Date implements Comparable<Date>{
 			if(day > TOTAL_AJSN_DAYS) return false;
 		} else  //MONTHS WITH 31 DAYS
 		{
-			if(this.day > TOTAL_MONTH_DAYS-1) return false;
+			if(this.day > TOTAL_MONTH_DAYS) return false;
 		}
 
 		return true;

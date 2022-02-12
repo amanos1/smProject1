@@ -40,6 +40,7 @@ public class Patient {
     {
         return dob;
     }
+
     public boolean equals(Patient patient)
     {
         return (this.fname.equals(patient.getFirstName()) &&
@@ -52,10 +53,10 @@ public class Patient {
         return (fname+" "+lname+", DOB: "+dob);
     }
 
-    //public int compareTo(Patient patient) {
-    //    if(this.equals(patient))
-    //    {
-    //        return 0;
-    //    }else if()
-    //}
+    public int compareTo(Patient patient)
+    {
+    	if(lname.compareTo(patient.getLastName()) != 0) return lname.compareTo(patient.getLastName());
+    	if(fname.compareTo(patient.getFirstName()) != 0) return fname.compareTo(patient.getFirstName());
+    	return dob.compareTo(patient.getDOB());
+    }
 }

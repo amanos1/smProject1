@@ -30,29 +30,33 @@ public class Appointment
 	{
 		return this.location;
 	}
-	//NEED TO FINISH THIS METHOD
+
+	//For use with the printByZip function
 	public int compareTo(Appointment a)
 	{
-		if(this.getTimeslot().compareTo(this.getTimeslot()) == 0)
-			{
-				if(this.location.equals(ts.getLocation())) 
-				{
-					return 0;
-				}
-			}
-			return 2;
+		if(location.getZipCode() > a.getLocation().getZipCode()) return 1;
+		if(location.getZipCode() < a.getLocation().getZipCode()) return -1;
+		return slot.compareTo(a.getTimeslot());
 	}
 	
-	public boolean isValidTime() 
+	public boolean isValidTime()
+	{
+		final int TIME_INTERVAL = 15;
+		final int MIN_HOUR = 9;
+		final int MAX_HOUR = 16;
+		final int MAX_MIN = 45;
+
+		if(slot.getHour() < MIN_HOUR || slot.getHour() > MAX_HOUR
+				|| (slot.getHour() == MAX_HOUR && slot.getMinute() > MAX_MIN)) 
 		{
-			if(this.getTimeslot().getHour() < 9 || this.getTimeslot().getHour() > 16 || (this.getTimeslot().getHour() == 16 && this.getTimeslot().getMinute() > 45)) 
-			{
-				return false;
-			}
-			return true;
+			return false;
 		}
-		
-	
+
+		if(slot.getMinute() % TIME_INTERVAL != 0) return false;
+
+		return true;
+	}
+
 	public boolean equals(Appointment a)
 	{
 		return (this.patient.equals(a.getPatient()) && this.slot.equals(a.getTimeslot())&&

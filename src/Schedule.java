@@ -4,11 +4,10 @@ public class Schedule
 {
 	   private Appointment [] appointments;
 	    private int numAppts;
-	    private int maxNum = 10;
 
 	    public Schedule()
 	    {
-	        appointments = new Appointment[maxNum];
+	        appointments = new Appointment[10];
 	        numAppts = 0;
 	    }
 
@@ -37,8 +36,7 @@ public class Schedule
 
 	    private void grow()
 	    {
-	    	maxNum += 4;
-	        Appointment [] newAppointment = new Appointment[maxNum];
+	        Appointment [] newAppointment = new Appointment[numAppts+4];
 	        for(int i = 0; i < numAppts; i++)
 	        {
 	            newAppointment[i] = appointments[i];
@@ -48,41 +46,10 @@ public class Schedule
 
 	    public boolean add(Appointment appt)
 	    {
-	        if(numAppts == 0)
-	        {
-	            appointments[0] = appt;
-	            numAppts++;
-	            return true;
-	        }else
-	        {
-	            final int TIME_INTERVAL = 15;
-	            int start = appt.getTimeslot().getMinute() - TIME_INTERVAL;
-	            int end = appt.getTimeslot().getMinute() + TIME_INTERVAL;
-	            Appointment check = new Appointment(appt.getPatient(),appt.getTimeslot(),appt.getLocation());
-
-	            //if an appointment already exists return false
-	            for(int i = 0; i < numAppts; i++)
-	            {
-	                if(appointments[i].equals(appt))
-	                {
-	                    return false;
-	                }
-	            }
-	            for(int j = start; j <= end; j++)
-	            {
-	                check.getTimeslot().setHour(appt.getTimeslot().getHour());
-	                check.getTimeslot().setMinute(j);
-	                if(find(check) != -1)
-	                {
-	                    return false;
-	                }
-	            }
-	            appointments[numAppts] = appt;
-	            numAppts++;
-	            if(numAppts == maxNum) grow();
-	            return true;
-
-	        }
+            appointments[numAppts] = appt;
+            numAppts++;
+            if(numAppts == appointments.length) grow();
+            return true;
 	    }
 
 	    private void swap(int a, int b)
@@ -95,113 +62,109 @@ public class Schedule
 	    public boolean remove(Appointment appt)
 	    {
 	        int index = find(appt);
-	        if(numAppts == 0) {
-	            return false;
-	        }else
-	        {
-	            if(index == -1) {
-	                return false;
-	            }else {
-	            	swap(index, --numAppts);
-	                appointments[numAppts] = null;
-	                return true;
-	            }
-	        }
+            if(index == -1) {
+                return false;
+            }else {
+            	for(int i = index; i < numAppts-2; i++)
+            		swap(i, i+1);
+                appointments[--numAppts] = null;
+                return true;
+            }
 	    }
 
-	    public int removeAll(Patient p)
+	    public boolean removeAll(Patient p)
 	    {
-	        int totalRemoved = 0;
+	        boolean removed = false;
 	        for(int i = 0; i < numAppts; i++)
 	        {
 	            if(appointments[i].getPatient().equals(p))
 	            {
-	                appointments[i] = null;
-	                totalRemoved++;
+	            	for(int j = i; j < numAppts-1; j++)
+	            		swap(j, j+1);
+	            	i--;
+	            	appointments[--numAppts] = null;
+	                removed = true;
 	            }
 	        }
-	        return totalRemoved;
+	        return removed;
 	    }
 
 	    public void print()
 	    {
 	    	System.out.println("*list of appointments in the schedule*");
 	        for(int i = 0; i < numAppts; i++)
-	        {
 	            System.out.println(appointments[i].toString());
-	        }
 	    	System.out.println("*end of schedule*");
 	    }
-	    
+
 	    public boolean checkConflict(Appointment a) 
 	    {
-	    	for(int i = 0; i < appointments.length; i++) 
+	    	for(int i = 0; i < numAppts; i++) 
 	    	{ 
-	    		if(appointments[i] != null) {
-	    			if(appointments[i].getTimeslot().compareTo(a.getTimeslot()) == 0 && appointments[i].getLocation().equals(a.getLocation()))  
-	    			{
-	    				return true;
-	    			}
-	    		}
+    			if(appointments[i].getTimeslot().compareTo(a.getTimeslot()) == 0 && appointments[i].getPatient().equals(a.getPatient()))  
+    			{
+    				return true;
+    			}
 	    	}
 	    	return false;
 	    }
 	    
-	    public boolean checkTimeslotConflict(Timeslot t) 
+	    public boolean checkTimeslotConflict(Appointment t)
 	    {
-	    for(int i = 0; i < appointments.length; i++) 
-	    {
-	    	if(appointments[i] != null) 
-	    	{
-	    		if(t.compareTo(appointments[i].getTimeslot()) == 0) 
+		    for(int i = 0; i < numAppts; i++) 
+		    {
+	    		if(t.getTimeslot().compareTo(appointments[i].getTimeslot()) == 0 && t.getLocation() == appointments[i].getLocation())
 	    		{
 	    			return true;
 	    		}
-	    	}
-	    }
-	    return false;
+		    }
+		    return false;
 	    }
 
 	    public void printByZip()
 	    {
-	        Appointment temp;
-
-	        for(int i = 1; i < numAppts; i++) {
-	            for(int j = numAppts-1; j >= i; j--) {
-	                if(appointments[j-1].getLocation().getZipCode()
-	                        > appointments[j].getLocation().getZipCode()) {
-	                    temp = appointments[j-1];
-	                    appointments[j-1] = appointments[j];
-	                    appointments[j] = temp;
+	        for(int i = 1; i < numAppts; i++)
+	        {
+	            for(int j = numAppts-1; j >= i; j--)
+	            {
+	                if(appointments[j-1].compareTo(appointments[j]) > 0)
+	                {
+	                	swap(j, j-1);
 	                }
 	            }
 	        }
-	        print();
+	    	System.out.println("*list of appointments by zip and time slot.*");
+	        for(int i = 0; i < numAppts; i++)
+	            System.out.println(appointments[i].toString());
+	    	System.out.println("*end of schedule*");
 	    }
 
 	    public void printByPatient()
 	    {
-	    	 Appointment temp;
-
-		        for(int i = 1; i < numAppts; i++) {
-		            for(int j = numAppts-1; j >= i; j--) {
-		                if(appointments[j-1].getPatient().getFirstName().compareTo(appointments[j].getPatient().getFirstName())
-		                        > 0) {
-		                    temp = appointments[j-1];
-		                    appointments[j-1] = appointments[j];
-		                    appointments[j] = temp;
-		                }
-		            }
-		        }
-		        print();
+	        for(int i = 1; i < numAppts; i++)
+	        {
+	            for(int j = numAppts-1; j >= i; j--)
+	            {
+	                if(appointments[j-1].getPatient().compareTo(appointments[j].getPatient()) > 0)
+	                {
+	                	swap(j, j-1);
+	                }
+	            }
+	        }
+	    	System.out.println("*list of appointments by patient.*");
+	        for(int i = 0; i < numAppts; i++)
+	            System.out.println(appointments[i].toString());
+	    	System.out.println("*end of schedule*");
 	    }
+
 	    // removes appointments from the schedule that was scheduled before today
 	    public void clearSchedule()
 	    {
 	        Date dateToday = new Date();
 	        for(int i = 0; i < numAppts; i++)
 	        {
-	            if(appointments[i].getTimeslot().getDate().compareTo(dateToday) == -1) {
+	            if(appointments[i].getTimeslot().getDate().compareTo(dateToday) == -1)
+	            {
 	                appointments[i] = null;
 	                numAppts++;
 	            }

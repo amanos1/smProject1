@@ -15,15 +15,8 @@ public class Timeslot {
 	
 	public Timeslot(Date d, Time t) 
 	{
-		Date date = new Date();
-		Time time = new Time();
-		date.setDay(d.getDay());
-		date.setMonth(d.getMonth());
-		date.setYear(d.getYear());
-		time.setHour(t.getHour());
-		time.setMinute(t.getMinute());
-		this.date = date;
-		this.time = time;
+		date = new Date(d);
+		time = new Time(t);
 	}
 	
 	public Timeslot(int month, int day, int year, int hour, int minute) 
@@ -84,15 +77,8 @@ public class Timeslot {
 	//this is new appointment
 	public int compareTo(Timeslot ts) 
 	{
-		final int TIME_INTERVAL = 15;
-		if((this.getDate().compareTo(ts.getDate())) == 0 )
-		{
-			if(this.getMinute() >= (ts.getMinute()-TIME_INTERVAL) && this.getMinute() <= (ts.getMinute()+TIME_INTERVAL)) 
-			{
-				return 0;
-			}
-		}
-		return 2;
+		if(date.compareTo(ts.getDate()) != 0) return date.compareTo(ts.getDate());
+		return time.compareTo(ts.getTime());
 	}
 
 	public String toString() 
