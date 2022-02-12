@@ -22,6 +22,19 @@ public class Schedule
         }
         return -1;
     }
+    
+    public boolean appointmentExists(Appointment a) 
+	    {
+	    	if(find(a) != -1) 
+	    	{
+	    		return true;
+	    	}else 
+	    	{
+	    		return false;
+	    	}
+	    	
+	    }
+
 
     private void grow()
     {
