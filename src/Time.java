@@ -2,10 +2,10 @@ package src;
 import java.util.Calendar;
 
 /**
- * The Date class stores information about a single time.
- * It stores the hour and the minute.
+ * The Time class object stores information about a single time.
+ * This includes the hour and the minute.
+ * Can determine if the time is a valid one.
  * @author Aaron Browne, Harshkumar Patel
- *
  */
 public class Time implements Comparable<Time>{
     private int hour;
@@ -13,8 +13,8 @@ public class Time implements Comparable<Time>{
     Calendar calendar = Calendar.getInstance();
 
     /**
-     * If no argument is provided, this constructor creates a instance of time with the current time,
-     * provided by Java's Calendar class.
+     * When no arguments are provided, this constructor will create an instance of time
+     * with the current time, as provided by Java's Calendar class.
      */
     public Time()
     {
@@ -23,7 +23,7 @@ public class Time implements Comparable<Time>{
     }
 
     /**
-     * Creates an instance of class with the hour and minute provided.
+     * Creates an instance of time with the hour and minute provided.
      * @param h The hour.
      * @param m The minute.
      */
@@ -33,18 +33,19 @@ public class Time implements Comparable<Time>{
         minute = m;
     }
 
-    /**
-     * Creates an instance of class with the hour and minute parsed from the string.
-     * @param t The time string in a hh:mm format.
-     */
-    public Time(String t) {
+	/**
+	 * When given a string, this constructor parses the string and creates an instance of date with it.
+	 * @param t The time string in hh:mm format.
+	 */
+    public Time(String t)
+    {
     	String[] timeElements = t.split(":");
         hour = Integer.parseInt(timeElements[0]);
         minute = Integer.parseInt(timeElements[1]);
     }
 
     /**
-     * Creates a clone of the given time.
+     * Creates a clone of the time provided.
      * @param t The time to clone.
      */
     public Time(Time t)
@@ -92,7 +93,7 @@ public class Time implements Comparable<Time>{
     }
 
     /**
-     * Determines if the time is a valid time.
+     * Determines if the time is a valid one.
      * @return true if the time is valid, false if not.
      */
     public boolean isValid()
@@ -100,20 +101,19 @@ public class Time implements Comparable<Time>{
         final int TOTAL_HOURS = 24;
         final int TOTAL_MINUTES = 60;
 
-        if(hour >= TOTAL_HOURS || hour < 0)
+        if(hour >= TOTAL_HOURS)
         {
             return false;
-        }else if(minute >= TOTAL_MINUTES || minute < 0)
+        } else if(minute >= TOTAL_MINUTES)
         {
             return false;
         }
-
         return true;
     }
 
     /**
-     * Checks if two times are equal.
-     * @param t The time to compare the current one to.
+     * Determines if two times are equal.
+     * @param t The time to compare against.
      * @return true if the times are equal, false if not.
      */
     public boolean equals(Time t)
@@ -123,8 +123,8 @@ public class Time implements Comparable<Time>{
 
     /**
      * Compares two times.
-     * @param time The time to compare the current one to.
-     * @return 1, 0, or -1 if the time is after, the same, or equal to the input time respectively.
+     * @param time The time to compare against.
+     * @return 1 if the current time is after the given one, -1 is the opposite is true, and 0 if the times are equal.
      */
     @Override
     public int compareTo(Time time)
@@ -138,7 +138,7 @@ public class Time implements Comparable<Time>{
 
     /**
      * Returns a string representation of the time.
-     * @return A string representation of the time in hh:mm format.
+     * @return A string representation of the time.
      */
     @Override
     public String toString()
@@ -147,7 +147,7 @@ public class Time implements Comparable<Time>{
 
         if(minute < 10) {
             m += minute;
-        } else
+        }else
         {
             m = "" + minute;
         }

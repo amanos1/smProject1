@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"src","l":"Appointment"},{"p":"src","l":"Date"},{"p":"src","l":"Kiosk"},{"p":"src","l":"Location"},{"p":"src","l":"Month"},{"p":"src","l":"Patient"},{"p":"src","l":"RunProject1"},{"p":"src","l":"Schedule"},{"p":"src","l":"Time"},{"p":"src","l":"Timeslot"}]

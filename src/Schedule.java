@@ -1,4 +1,5 @@
 package src;
+
 /**
  * The Schedule class stores information about appointments.
  * It stores every information about all appointments and also total number of appointments booked.
@@ -68,7 +69,7 @@ public class Schedule
 
 	    /**
 	     * It adds appt Appointment to schedule and if the array of appointments is full, it increases the size of array by 4 using grow().
-	     * @param Appointment that we want to add to the schedule.
+	     * @param appt Appointment that we want to add to the schedule.
 	     * @return true if the appointment is added to the schedule, false otherwise.
 	     */
 	    public boolean add(Appointment appt)
@@ -81,7 +82,8 @@ public class Schedule
 
 	    /**
 	     * Given index of two appointments in the appointments array, it swaps the appointments of those given indexes.
-	     * @param int a and b, the index of the elements that we want to swap.
+	     * @param a the index of one of the elements that we want to swap.
+	     * @param b the index of the other element that we want to swap.
 	     */
 	    private void swap(int a, int b)
 	    {
@@ -92,7 +94,7 @@ public class Schedule
 
 	    /**
 	     * Given a Appointment appt, it removes that particular appointment from the schedule
-	     * @param Appointment appt that we want to remove.
+	     * @param appt Appointment that we want to remove.
 	     * @return true if Appointment appt is removed from the schedule, false otherwise.
 	     */
 	    public boolean remove(Appointment appt)
@@ -111,7 +113,7 @@ public class Schedule
 	    /**
 	     * Given a Patient p, it removes all appointments that has the same Patient as Patient p.
 	     * If an appointment is removed, all the remaining appointments below that is shifted up accordingly.
-	     * @param the Patient p whose all appointments we want to be removed.
+	     * @param p the Patient whose all appointments we want to be removed.
 	     * @return true if a appointment is removed, false otherwise.
 	     */
 	    public boolean removeAll(Patient p)
@@ -144,7 +146,7 @@ public class Schedule
 
 	    /**
 	     * Given Appointment a it checks if the patient of the Appointment a, already has an appointment with same timeslot but at a different location.
-	     * @param the Appointment a that we want to check location conflict for.
+	     * @param a the Appointment that we want to check location conflict for.
 	     * @return true if the patient of Appointment a already has an appointment with that timeslot at the different location, and false otherwise.
 	     */
 	    public boolean checkConflict(Appointment a) 
@@ -161,7 +163,7 @@ public class Schedule
 	    
 	    /**
 	     * Given Appointment t it checks if timeslot and location of that appointment is already taken by an existing appointment.
-	     * @param Appointment t that we can want to check the time and location conflict for.
+	     * @param t that we can want to check the time and location conflict for.
 	     * @return true if timeslot and location of Appointment t is already taken by an existing appointment, and false otherwise.
 	     */
 	    public boolean checkTimeslotConflict(Appointment t)

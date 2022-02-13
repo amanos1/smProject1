@@ -1,14 +1,15 @@
 package src;
 
+/**
+ * The Patient class stores information about the patient.
+ * It stores patient's first name, last name and date of birth.
+ * @author Harshkumar Patel, Aaron Browne
+ */
 public class Patient {
-	/**
-	 * The Patient class stores information about the patient.
-	 * It stores patient's first name, last name and date of birth.
-	 * @author Harshkumar Patel,  Aaron Browne
-	 */
     private String fname;
     private String lname;
     private Date dob;
+
     /**
 	 * Creates an instance of the Patient class, given no parameters.
 	 * first name and last name is set to null and date of birth is set to today's date.
@@ -17,6 +18,7 @@ public class Patient {
     {
         dob = new Date();
     }
+
     /**
 	 * Creates an instance of the Patient class when given a object of type Patient
 	 * @param p Patient the appointment is for.
@@ -72,7 +74,7 @@ public class Patient {
 
     /**
    	 * Checks to see if the patient are the same.
-   	 * @param The patient we are comparing the current one to.
+   	 * @param obj The patient we are comparing the current one to.
    	 * @return True if two patient have same first name, last name, and date of birth, false otherwise.
    	 */
     @Override
@@ -97,7 +99,7 @@ public class Patient {
 	/**
 	 * Compares patients to each other first by the last name and then by first name. If the first name and last name is same, date of birth is compared.
 	 * For use with the printByPatient function.
-	 * @param a The patient to compare the current one to.
+	 * @param patient The patient to compare the current one to.
 	 * @return int value if last name's or first name's are not same, it returns -1,0,-1 based on compareTo() method of Date class.
 	 */
     public int compareTo(Patient patient)

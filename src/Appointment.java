@@ -90,7 +90,7 @@ public class Appointment
 
 	/**
 	 * Checks to see if two appointments are equal.
-	 * @param a The appointment we are comparing the current one to.
+	 * @param obj The appointment we are comparing the current one to.
 	 * @return True if the appointments have the same patient, time, and location, false if they don't.
 	 */
 	@Override
