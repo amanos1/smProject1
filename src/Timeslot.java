@@ -68,7 +68,7 @@ public class Timeslot {
 	}
 	
 	/**
-	 * this method returns hour of the current Timeslot object.
+	 * This method returns hour of the current Timeslot object.
 	 * @return int value of hour of current Timeslot object.
 	 */
 	public int getHour() 
@@ -78,7 +78,7 @@ public class Timeslot {
 	}
 	
 	/**
-	 * this method returns minute of the current Timeslot object.
+	 * This method returns minute of the current Timeslot object.
 	 * @return int value of minute of current Timeslot object.
 	 */
 	public int getMinute() 
@@ -88,7 +88,7 @@ public class Timeslot {
 	}
 
 	/**
-	 * this method returns Date of the current Timeslot object
+	 * This method returns Date of the current Timeslot object
 	 * @return Date object that represents the date of the current Timeslot object.
 	 */
 	public Date getDate() 
@@ -98,7 +98,7 @@ public class Timeslot {
 	}
 
 	/**
-	 * this method returns Time of the current Timeslot Object.
+	 * This method returns Time of the current Timeslot Object.
 	 * @return Time object that represent the time of the current Timeslot object.
 	 */
 	public Time getTime()

@@ -82,8 +82,8 @@ public class Schedule
 
 	    /**
 	     * Given index of two appointments in the appointments array, it swaps the appointments of those given indexes.
-	     * @param a the index of one of the elements that we want to swap.
-	     * @param b the index of the other element that we want to swap.
+	     * @param a The index of one of the elements that we want to swap.
+	     * @param b The index of the other element that we want to swap.
 	     */
 	    private void swap(int a, int b)
 	    {
@@ -113,7 +113,7 @@ public class Schedule
 	    /**
 	     * Given a Patient p, it removes all appointments that has the same Patient as Patient p.
 	     * If an appointment is removed, all the remaining appointments below that is shifted up accordingly.
-	     * @param p the Patient whose all appointments we want to be removed.
+	     * @param p The Patient whose all appointments we want to be removed.
 	     * @return true if a appointment is removed, false otherwise.
 	     */
 	    public boolean removeAll(Patient p)
@@ -146,7 +146,7 @@ public class Schedule
 
 	    /**
 	     * Given Appointment a it checks if the patient of the Appointment a, already has an appointment with same timeslot but at a different location.
-	     * @param a the Appointment that we want to check location conflict for.
+	     * @param a The Appointment that we want to check location conflict for.
 	     * @return true if the patient of Appointment a already has an appointment with that timeslot at the different location, and false otherwise.
 	     */
 	    public boolean checkConflict(Appointment a) 
@@ -163,7 +163,7 @@ public class Schedule
 	    
 	    /**
 	     * Given Appointment t it checks if timeslot and location of that appointment is already taken by an existing appointment.
-	     * @param t that we can want to check the time and location conflict for.
+	     * @param t Appointment that we can want to check the time and location conflict for.
 	     * @return true if timeslot and location of Appointment t is already taken by an existing appointment, and false otherwise.
 	     */
 	    public boolean checkTimeslotConflict(Appointment t)
@@ -179,7 +179,7 @@ public class Schedule
 	    }
 
 	    /**
-	     * Sorts the appointments array and orders the appointment by zip code.
+	     * Sorts the appointments array by zip code and prints it to the console.
 	     */
 	    public void printByZip()
 	    {
@@ -200,7 +200,7 @@ public class Schedule
 	    }
 
 	    /**
-	     * Sorts the appointments array and orders the appointment by patient's first name, last name, and date of birth.
+	     * Sorts the appointments array by patient's last name, first name, and date of birth and prints it to the console.
 	     */
 	    public void printByPatient()
 	    {
@@ -221,7 +221,7 @@ public class Schedule
 	    }
 
 	    /**
-	     * removes all Appointments that was scheduled before today's date.
+	     * Removes all Appointments that was scheduled before today's date.
 	     */
 	    public void clearSchedule()
 	    {
